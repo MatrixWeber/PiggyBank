@@ -1,2 +1,2 @@
 # PiggyBank
-This app helps you to same money
+This app helps you to save money
