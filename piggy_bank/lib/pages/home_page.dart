@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
 import 'package:piggy_bank/services/authentication.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:piggy_bank/models/value.dart';
 import 'dart:async';
 import 'dart:math' as math;
 
+import '../custom_app_bar.dart';
+
 class HomePage extends StatefulWidget {
   double _countSubjectValue;
-
+  bool _endOfWeekDetected = false;
   HomePage({Key key, this.auth, this.userId, this.onSignedOut})
       : super(key: key);
 
@@ -248,6 +251,7 @@ class _HomePageState extends State<HomePage> {
     if (subject < 0) {
       color = Colors.red;
     }
+  
     return Dismissible(
       key: Key(valueId),
       background: Container(color: Colors.red),
@@ -296,6 +300,7 @@ class _HomePageState extends State<HomePage> {
   Widget _showValueList() {
     if (_valueList.length > 0) {
       widget._countSubjectValue = 0;
+        String formattedDate = DateFormat('EEE d MMM').format(new );
       return ListView.builder(
           shrinkWrap: true,
           itemCount: _valueList.length + 1,
@@ -331,20 +336,7 @@ class _HomePageState extends State<HomePage> {
         tooltip: 'Increment',
         child: Icon(Icons.add),
       ),
-      bottomNavigationBar: Container(
-        alignment: Alignment.center,
-        color: Colors.blue,
-        width: 20,
-        height: 30,
-        child: Row(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            Text('Week summery'),
-            Text(widget._countSubjectValue.toString()),
-          ],
-        ),
-      ),
+      bottomNavigationBar: CustomAppBar(),
     );
   }
 }

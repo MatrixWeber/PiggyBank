@@ -6,8 +6,10 @@ class Value {
   double subject;
   bool completed;
   String userId;
-  String moneyArt = "€";
-  String formattedDate = DateFormat('EEE d MMM').format(new DateTime.now());
+  String moneyArt = "€"; 
+  int year = int.parse(DateFormat('EEE d MMM').format(DateTime.now()));
+  int day = int.parse(DateFormat('EEE d MMM').format(DateTime.now()));
+  int month = int.parse(DateFormat('EEE d MMM').format(DateTime.now()));
 
   Value(this.subject, this.userId, this.completed);
 
@@ -17,7 +19,9 @@ class Value {
     subject = snapshot.value["subject"],
     completed = snapshot.value["completed"],
     moneyArt = snapshot.value["money_art"],
-    formattedDate = snapshot.value["date"];
+    year = snapshot.value["year"];
+    month = snapshot.value["month"];
+    day = snapshot.value["day"];
 
   toJson() {
     return {
@@ -25,7 +29,9 @@ class Value {
       "subject": subject,
       "completed": completed,
       "money_art": moneyArt,
-      "date": formattedDate,
+      "year": year,
+      "day": day,
+      "month": month,
     };
   }
 }
